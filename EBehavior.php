@@ -43,7 +43,6 @@ class EBehavior extends CBehavior {
      * @return string In jstree format.
      */
     public function formatNode($model) {
-        fb("formatNode");
         $jstreeformat=array(
         'attributes'=>array(
             'id'=>$model->getAttribute($this->id)
@@ -107,15 +106,16 @@ class EBehavior extends CBehavior {
      * @param CActiverecord::model $newnode new node to insert
      * @param CActiverecord::model $refnode reference node to insertion
      * @param string $type where to insert node
+     * @param boolean $nodenaming if there should be a nodenaming check default true
      * @return CJSON::encode the node inserted in json encode
      */
-    public function insertingnode( $newnode=null,$refnode=null,$type=null ) {
+    public function insertingnode( $newnode=null,$refnode=null,$type=null, $nodenaming=true ) {
         if ( $type=="inside") {
             $parent=$refnode;
         } else {
             $parent=$refnode->parent();
         }
-        $newnode=$this->nodeNaming($parent, $newnode);
+        $newnode= ($nodenaming) ? $this->nodeNaming($parent, $newnode) : $newnode;
         $success=false;
         switch ( $type ) {
             case "inside":
