@@ -142,10 +142,32 @@ class EBehavior extends CBehavior {
 
         return $success;
     }
-    public function copytree( $copy, $refnode, $type ){
-        if($copy->isLeaf()){
-            return $this->insertingnode( $copy,$refnode,$type );
+    public function copytree( $id, $ref, $type ){
+        $classname=$this->classname;
+
+        $node=CActiveRecord::model($this->classname)->findByPk($id);
+        $refnode=CActiveRecord::model($this->classname)->findByPk($ref);
+
+        if($node->isLeaf()) {
+            $copy=new $classname();
+            $copy->attributes=$node->attributes;
+            $this->insertingnode( $copy,$refnode,$type );
+        } else {
+            $copy=new $classname();
+            $copy->attributes=$node->attributes;
+
+            $this->insertingnode( $copy,$refnode,$type );
+
+            $childs = $node->children()->findall();
+            foreach( $childs as $i => $chnode ) {
+                $this->copytree( $chnode->getAttribute($this->id) , $copy->getAttribute($this->id) , "inside" , false  );
+            }
         }
+
+
+        //echo $this->getController()->copytree($copy,$refnode,$type);
+        
+
     }
 }
 ?>

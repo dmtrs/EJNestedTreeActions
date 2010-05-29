@@ -50,18 +50,20 @@ class Copynode extends CAction {
         $ref=$_GET['ref_id'];
         $type=$_GET['type'];
 
-        $node=CActiveRecord::model($this->getController()->classname)->findByPk($id[0]);
-        $refnode=CActiveRecord::model($this->getController()->classname)->findByPk($ref);
+        echo $this->getController()->copytree($id[0],$ref,$type);
 
-        $classname=$this->getController()->classname;
-        $idattribute=$this->getController()->id;
-
-        $copy=new $classname();
-        $copy->attributes=$node->attributes;
-
-
-        echo $this->getController()->copytree($copy,$refnode,$type);
-        //echo $this->getController()->insertingnode( $copy,$refnode,$type );
+//        $node=CActiveRecord::model($this->getController()->classname)->findByPk($id[0]);
+//        $refnode=CActiveRecord::model($this->getController()->classname)->findByPk($ref);
+//
+//        $classname=$this->getController()->classname;
+//        $idattribute=$this->getController()->id;
+//
+//        $copy=new $classname();
+//        $copy->attributes=$node->attributes;
+//
+//
+//        echo $this->getController()->copytree($copy,$refnode,$type);
+//        //echo $this->getController()->insertingnode( $copy,$refnode,$type );
 
         //echo $this->getcontroller()->insertingnode($copy,$refnode,$type);
     }
