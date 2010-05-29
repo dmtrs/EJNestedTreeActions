@@ -121,7 +121,7 @@ $this->Widget('application.extensions.jsTree.CjsTree', array(
                         if ( jsondata ) {
                             $(NODE).attr("id",jsondata.attributes.id);
                             $(NODE).children("a:eq(0)").html("<ins>&nbsp;</ins>"+jsondata.data);
-                            crt=true;
+                            cp=true;
                         }
                     }
             });
