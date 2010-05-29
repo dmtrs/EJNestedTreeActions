@@ -100,7 +100,7 @@ class EBehavior extends CBehavior {
         return false;
     }
     /**
-     * This method is used internalyy by the Createnode and Copynode actions.
+     * This method is used internaly by the Createnode and Copynode actions.
      * It get's a new node to insert and depend type it insert it's appropriate
      * place relative to the refnode (reference node);
      * @param CActiverecord::model $newnode new node to insert
@@ -142,6 +142,13 @@ class EBehavior extends CBehavior {
 
         return $success;
     }
+    /**
+     * This methond is used mainly from the copynode action. It copies a node
+     * and his child if there are exist.
+     * @param string $id The id of the node to be copied
+     * @param string $ref The id of a reference node that is used with type to determine the new position
+     * @param string $type Where the new node will be copied
+     */
     public function copytree( $id, $ref, $type ){
         $classname=$this->classname;
 
@@ -157,7 +164,6 @@ class EBehavior extends CBehavior {
             $copy->attributes=$node->attributes;
 
             $this->insertingnode( $copy,$refnode,$type );
-
             $childs = $node->children()->findall();
             foreach( $childs as $i => $chnode ) {
                 $this->copytree( $chnode->getAttribute($this->id) , $copy->getAttribute($this->id) , "inside" , false  );

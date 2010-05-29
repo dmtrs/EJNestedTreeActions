@@ -116,19 +116,10 @@ $this->Widget('application.extensions.jsTree.CjsTree', array(
                 async: false,
                 data: ({id : NODE.id , ref_id : REF_NODE.id , type: TYPE }),
                 dataType: "json",
-                success: function( jsondata ){
-                        console.log(jsondata);
-                        if ( jsondata ) {
-                            $(NODE).attr("id",jsondata.attributes.id);
-                            $(NODE).children("a:eq(0)").html("<ins>&nbsp;</ins>"+jsondata.data);
-                            cp=true;
-                        }
+                success: function( ){
+                        TREE_OBJ.refresh(NODE);
                     }
             });
-            if( !cp ) {
-                alert("Could not copy node "+TREE_OBJ.get_text(NODE)+" "+TYPE+" "+TREE_OBJ.get_text(REF_NODE));
-                jQuery.tree.rollback(RB);
-            }
         }',
 
     "error"=>"js:function() { }",
