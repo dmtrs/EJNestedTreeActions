@@ -142,5 +142,10 @@ class EBehavior extends CBehavior {
 
         return $success;
     }
+    public function copytree( $copy, $refnode, $type ){
+        if($copy->isLeaf()){
+            return $this->insertingnode( $copy,$refnode,$type );
+        }
+    }
 }
 ?>

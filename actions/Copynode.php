@@ -58,9 +58,13 @@ class Copynode extends CAction {
 
         $copy=new $classname();
         $copy->attributes=$node->attributes;
-        
-        echo $this->getController()->insertingnode( $copy,$refnode,$type );
+
+
+        echo $this->getController()->copytree($copy,$refnode,$type);
+        //echo $this->getController()->insertingnode( $copy,$refnode,$type );
+
         //echo $this->getcontroller()->insertingnode($copy,$refnode,$type);
     }
+
 }
 ?>
