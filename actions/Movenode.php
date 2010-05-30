@@ -42,8 +42,10 @@ class Movenode extends CAction {
         
         $current=$this->getController()->nodeNaming($parent,$current);
         $current->save();
+        
+        $differentparent = $parent->getAttribute($this->getController()->identity)!=$current->parent()->getAttribute($this->getController()->identity);
 
-        if($this->getController()->mvinherit){
+        if( $this->getController()->mvinherit && $differentparent ) {
             fb("move inherit");
             $this->getController()->inheritvalues($current,$parent);
         }

@@ -144,10 +144,7 @@ class EBehavior extends CBehavior {
         $parent = ($type=="inside") ? $refnode : $refnode->parent();
 
         $newnode= ($nodenaming) ? $this->nodeNaming($parent, $newnode) : $newnode;
-        if($inheritvalues) {
-            fb("inherit");
-            $this->inheritvalues( $newnode , $parent );
-        }
+
         $success=false;
         switch ( $type ) {
             case "inside":
@@ -167,6 +164,10 @@ class EBehavior extends CBehavior {
                 break;
         }
         if($success) {
+            if($inheritvalues) {
+                fb("inherit");
+                $this->inheritvalues( $newnode , $parent );
+            }
             $jsondata=$this->formatNode($newnode);
             return CJSON::encode($jsondata);
         }
@@ -219,9 +220,9 @@ class EBehavior extends CBehavior {
      * or is moving in under the same parent before/after brothers.
      * In second case to copy the inherit values is useless.
      */
-        $differentparent = $parent->getAttribute($this->identity)!=$current->parent()->getAttribute($this->identity);
-        fb($differentparent);
-        if ( $differentparent ) {
+//        $differentparent = $parent->getAttribute($this->identity)!=$current->parent()->getAttribute($this->identity);
+//        fb($differentparent);
+//        if ( $differentparent ) {
             fb("in 1st if");
             foreach ( $this->inherit as $attr ) {
                 fb("currnet");
@@ -236,7 +237,7 @@ class EBehavior extends CBehavior {
                 }
                 $node->saveNode();
             }
-        }
+        //}
     }
 }
 ?>
