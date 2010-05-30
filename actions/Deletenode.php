@@ -59,7 +59,6 @@ class Deletenode extends CAction {
         $nodetodelete= CActiveRecord::model($this->getController()->classname)->findByPk($id);
         
         if ($nodetodelete->isRoot()) {
-            fb("is root");
             echo false;
             die;
         }

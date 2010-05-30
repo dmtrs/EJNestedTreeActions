@@ -165,7 +165,6 @@ class EBehavior extends CBehavior {
         }
         if($success) {
             if($inheritvalues) {
-                fb("inherit");
                 $this->inheritvalues( $newnode , $parent );
             }
             $jsondata=$this->formatNode($newnode);
@@ -214,24 +213,16 @@ class EBehavior extends CBehavior {
      * @param CActiveRecord $parent the new parent in either senario
      */
     public function inheritvalues( $current , $parent ) {
-    /**
-     * $differentparent is true when the old parent is different from new else false
-     * This check will be used in the if following to check if the node is changing parent
-     * or is moving in under the same parent before/after brothers.
-     * In second case to copy the inherit values is useless.
-     */
+
 //        $differentparent = $parent->getAttribute($this->identity)!=$current->parent()->getAttribute($this->identity);
-//        fb($differentparent);
 //        if ( $differentparent ) {
-            fb("in 1st if");
+
             foreach ( $this->inherit as $attr ) {
-                fb("currnet");
                 $current->setAttribute($attr,$parent->getAttribute($attr));
             }
             $current->saveNode();
             $descendants = $current->descendants()->findAll();
             foreach ( $descendants as $i => $node ) {
-                fb("descendants");
                 foreach ( $this->inherit as $attr ) {
                     $node->setAttribute($attr,$parent->getAttribute($attr));
                 }
