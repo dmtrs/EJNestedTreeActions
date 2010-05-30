@@ -29,7 +29,7 @@ class EBehavior extends CBehavior {
     /**
      * @var string the name of the id attribute of model
      */
-    public $id;
+    public $identity;
     /**
      *
      * @var string the attribute of model that will displayed
@@ -56,7 +56,7 @@ class EBehavior extends CBehavior {
     public function formatNode($model) {
         $jstreeformat=array(
         'attributes'=>array(
-            'id'=>$model->getAttribute($this->id)
+            'id'=>$model->getAttribute($this->identity)
         ),
             'data'=>$model->getAttribute($this->text),
         );
@@ -104,7 +104,7 @@ class EBehavior extends CBehavior {
      */
     public function nameExist($bro,$new){
         foreach( $bro as $i=>$bro ){
-            if( $bro->getAttribute($this->text) == $new->getAttribute($this->text) && $bro->getAttribute($this->id) != $new->getAttribute($this->id) ) {
+            if( $bro->getAttribute($this->text) == $new->getAttribute($this->text) && $bro->getAttribute($this->identity) != $new->getAttribute($this->identity) ) {
                 return true;
             }
         }
@@ -182,7 +182,7 @@ class EBehavior extends CBehavior {
             $this->insertingnode( $copy,$refnode,$type );
             $childs = $node->children()->findall();
             foreach( $childs as $i => $chnode ) {
-                $this->copytree( $chnode->getAttribute($this->id) , $copy->getAttribute($this->id) , "inside" , false  );
+                $this->copytree( $chnode->getAttribute($this->identity) , $copy->getAttribute($this->identity) , "inside" , false  );
             }
         }
 

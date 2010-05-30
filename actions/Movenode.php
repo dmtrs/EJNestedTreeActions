@@ -39,9 +39,11 @@ class Movenode extends CAction {
         $current= CActiveRecord::model($this->getController()->classname)->findByPk($id);
 
         $parent = ($type=="inside") ? $refnode : $refnode->parent();
-
+        fb($this->id);
+        fb($parent->getAttribute('id')."   ".$current->parent()->getAttribute('id') );
         $current=$this->getController()->nodeNaming($parent,$current);
         $current->save();
+        
         if ( $this->getController()->forceinherit  ) {
             fb("o yes");
             foreach ( $this->getController()->inherit as $attr ) {
