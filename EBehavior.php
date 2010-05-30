@@ -41,11 +41,25 @@ class EBehavior extends CBehavior {
      */
     public $inherit;
     /**
-     * If true the inherite will occure when moving or copying nodes from the
-     * new parent
+     * The following boolean attributes are have same behavior for different
+     * senarios:
+     * mvinherit is for moving nodes.
+     * cpinherit is for copying nodes.
+     * crtinherit is for creating node.
+     *
+     * If true at the senario the nodes will inherit the inherit values from
+     * the new parent
      * @var boolean
      */
-    public $forceinherit;
+    public $mvinherit;
+    public $cpinherit;
+    public $crtinherit;
+    /**
+     * If when creating node should check the future brothers for same name and change the new
+     * node name to old i++
+     * @var boolean
+     */
+    public $nodenaming;
     /**
      * Used internal function that takes a node and returns it as string.
      *
@@ -118,9 +132,10 @@ class EBehavior extends CBehavior {
      * @param CActiverecord::model $refnode reference node to insertion
      * @param string $type where to insert node
      * @param boolean $nodenaming if there should be a nodenaming check default true
+     * @param boolean $inheritvalues if inherit values must be copied or not.
      * @return CJSON::encode the node inserted in json encode
      */
-    public function insertingnode( $newnode=null,$refnode=null,$type=null, $nodenaming=true ) {
+    public function insertingnode( $newnode=null,$refnode=null,$type=null, $nodenaming=true , $inheritvalues=false ) {
 //        if ( $type=="inside") {
 //            $parent=$refnode;
 //        } else {
@@ -146,12 +161,14 @@ class EBehavior extends CBehavior {
                 break;
             case "after":
                 if ( $newnode->insertAfter($refnode,false) ) {
-                //if ( $newnode->insertBefore($refnode,false) ) {
                     $success=true;
                 }
                 break;
         }
-        if($success){
+        if($success) {
+            if($inheritvalues) {
+                $this->getController()->inheritvalues( $newnode , $parent );
+            }
             $jsondata=$this->formatNode($newnode);
             return CJSON::encode($jsondata);
         }
@@ -190,6 +207,35 @@ class EBehavior extends CBehavior {
         //echo $this->getController()->copytree($copy,$refnode,$type);
         
 
+    }
+    /**
+     * This method is used to at create/copy or move. If the last $inherit attribute is true
+     * the nodes under current and current also will inherit the values from the new parent.
+     * @param CActiveRecord $current node that is created/copied or moved
+     * @param CActiveRecord $parent the new parent in either senario
+     */
+    public function inheritvalues( $current , $parent ) {
+    /**
+     * $differentparent is true when the old parent is different from new else false
+     * This check will be used in the if following to check if the node is changing parent
+     * or is moving in under the same parent before/after brothers.
+     * In second case to copy the inherit values is useless.
+     */
+        $differentparent = $parent->getAttribute($this->identity)!=$current->parent()->getAttribute($this->identity);
+
+        if ( $differentparent ) {
+            foreach ( $this->inherit as $attr ) {
+                $current->setAttribute($attr,$parent->getAttribute($attr));
+            }
+            $current->saveNode();
+            $descendants = $current->descendants()->findAll();
+            foreach ( $descendants as $i => $node ) {
+                foreach ( $this->inherit as $attr ) {
+                    $node->setAttribute($attr,$parent->getAttribute($attr));
+                }
+                $node->saveNode();
+            }
+        }
     }
 }
 ?>
