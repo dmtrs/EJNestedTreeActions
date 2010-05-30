@@ -39,13 +39,20 @@ class Movenode extends CAction {
         $current= CActiveRecord::model($this->getController()->classname)->findByPk($id);
 
         $parent = ($type=="inside") ? $refnode : $refnode->parent();
-        fb($this->id);
-        fb($parent->getAttribute('id')."   ".$current->parent()->getAttribute('id') );
+        
         $current=$this->getController()->nodeNaming($parent,$current);
         $current->save();
+
+        /**
+         * $differentparent is true when the old parent is different from new else false
+         * This check will be used in the if following to check if the node is changing parent
+         * or is moving in under the same parent before/after brothers.
+         * In second case to copy the inherit values is useless.
+         */
+
+        $differentparent = $parent->getAttribute($this->getController()->identity)!=$current->parent()->getAttribute($this->getController()->identity);
         
-        if ( $this->getController()->forceinherit  ) {
-            fb("o yes");
+        if ( $this->getController()->forceinherit && $differentparent ) {
             foreach ( $this->getController()->inherit as $attr ) {
                 $current->setAttribute($attr,$parent->getAttribute($attr));
             }
@@ -58,27 +65,21 @@ class Movenode extends CAction {
                 $node->saveNode();
             }
         }
-
-        switch ( $type ) {
-            case "before":
-                $current->moveBefore($refnode);
-                break;
-            case "after":
-                $current->moveAfter($refnode);
-                break;
-            case "inside":
-                /**
-                 * In case user tries to move the last node of a sub-tree
-                 * inside the same sub-tree then the $current and the $refnode
-                 * will be the same node.
-                 * Then ENestedSetBehavior will raise the
-                 * "The target node should not be self." exception so we use
-                 * this if to avoid it.
-                 */
-                if ( $current != $refnode ) {
+        /**
+         * In all cases the $current node must be diff from the $refnode
+         */
+        if ( $refnode->getAttribute($this->getController()->identity)!=$current->getAttribute($this->getController()->identity) ) {
+            switch ( $type ) {
+                case "before":
+                    $current->moveBefore($refnode);
+                    break;
+                case "after":
+                    $current->moveAfter($refnode);
+                    break;
+                case "inside":
                     $current->moveAsLast($refnode);
-                }
-                break;
+                    break;
+            }
         }
 
 
