@@ -45,7 +45,7 @@ class EBehavior extends CBehavior {
      * new parent
      * @var boolean
      */
-    public $forceinhe;
+    public $forceinherit;
     /**
      * Used internal function that takes a node and returns it as string.
      *

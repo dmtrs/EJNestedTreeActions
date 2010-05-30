@@ -42,7 +42,20 @@ class Movenode extends CAction {
 
         $current=$this->getController()->nodeNaming($parent,$current);
         $current->save();
-        //$this->getController()->move($current,$refnode,$type);
+        if ( $this->getController()->forceinherit  ) {
+            fb("o yes");
+            foreach ( $this->getController()->inherit as $attr ) {
+                $current->setAttribute($attr,$parent->getAttribute($attr));
+            }
+            $current->saveNode();
+            $descendants = $current->descendants()->findAll();
+            foreach ( $descendants as $i => $node ) {
+                foreach ( $this->getController()->inherit as $attr ) {
+                    $node->setAttribute($attr,$parent->getAttribute($attr));
+                }
+                $node->saveNode();
+            }
+        }
 
         switch ( $type ) {
             case "before":
@@ -65,6 +78,8 @@ class Movenode extends CAction {
                 }
                 break;
         }
+
+
         echo $current->getAttribute($this->getController()->text);
     }
 
