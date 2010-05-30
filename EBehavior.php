@@ -142,11 +142,12 @@ class EBehavior extends CBehavior {
 //            $parent=$refnode->parent();
 //        }
         $parent = ($type=="inside") ? $refnode : $refnode->parent();
-        
-        foreach( $this->inherit as $attr ) {
-            $newnode->setAttribute($attr,$parent->getAttribute($attr));
-        }
+
         $newnode= ($nodenaming) ? $this->nodeNaming($parent, $newnode) : $newnode;
+        if($inheritvalues) {
+            fb("inherit");
+            $this->inheritvalues( $newnode , $parent );
+        }
         $success=false;
         switch ( $type ) {
             case "inside":
@@ -166,9 +167,6 @@ class EBehavior extends CBehavior {
                 break;
         }
         if($success) {
-            if($inheritvalues) {
-                $this->getController()->inheritvalues( $newnode , $parent );
-            }
             $jsondata=$this->formatNode($newnode);
             return CJSON::encode($jsondata);
         }
@@ -191,12 +189,12 @@ class EBehavior extends CBehavior {
         if($node->isLeaf()) {
             $copy=new $classname();
             $copy->attributes=$node->attributes;
-            $this->insertingnode( $copy,$refnode,$type );
+            $this->insertingnode( $copy,$refnode,$type,true,$this->cpinherit );
         } else {
             $copy=new $classname();
             $copy->attributes=$node->attributes;
 
-            $this->insertingnode( $copy,$refnode,$type );
+            $this->insertingnode( $copy,$refnode,$type,true,$this->cpinherit );
             $childs = $node->children()->findall();
             foreach( $childs as $i => $chnode ) {
                 $this->copytree( $chnode->getAttribute($this->identity) , $copy->getAttribute($this->identity) , "inside" , false  );
@@ -222,14 +220,17 @@ class EBehavior extends CBehavior {
      * In second case to copy the inherit values is useless.
      */
         $differentparent = $parent->getAttribute($this->identity)!=$current->parent()->getAttribute($this->identity);
-
+        fb($differentparent);
         if ( $differentparent ) {
+            fb("in 1st if");
             foreach ( $this->inherit as $attr ) {
+                fb("currnet");
                 $current->setAttribute($attr,$parent->getAttribute($attr));
             }
             $current->saveNode();
             $descendants = $current->descendants()->findAll();
             foreach ( $descendants as $i => $node ) {
+                fb("descendants");
                 foreach ( $this->inherit as $attr ) {
                     $node->setAttribute($attr,$parent->getAttribute($attr));
                 }
