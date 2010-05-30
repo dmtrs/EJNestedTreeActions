@@ -38,12 +38,7 @@ class Movenode extends CAction {
         }
         $current= CActiveRecord::model($this->getController()->classname)->findByPk($id);
 
-
-        if ( $type !="inside" ) {
-            $parent=$refnode->parent();
-        } else {
-            $parent=$refnode;
-        }
+        $parent = ($type=="inside") ? $refnode : $refnode->parent();
 
         $current=$this->getController()->nodeNaming($parent,$current);
         $current->save();

@@ -53,6 +53,7 @@ class Createnode extends CAction {
         $modelclass=$this->getController()->classname;
         $newnode=new $modelclass();
         $newnode->setAttribute($this->getController()->text,$defaultname);
+
         echo $this->getController()->insertingnode( $newnode,$refnode,$type );
     }
 

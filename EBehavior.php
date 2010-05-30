@@ -37,11 +37,22 @@ class EBehavior extends CBehavior {
      */
     public $text;
     /**
+     * @var array the attributes that will be inherited from parent to children
+     */
+    public $inherit;
+    /**
+     * If true the inherite will occure when moving or copying nodes from the
+     * new parent
+     * @var boolean
+     */
+    public $forceinhe;
+    /**
      * Used internal function that takes a node and returns it as string.
      *
      * @param CActiveRecord $model
      * @return string In jstree format.
      */
+
     public function formatNode($model) {
         $jstreeformat=array(
         'attributes'=>array(
@@ -110,10 +121,15 @@ class EBehavior extends CBehavior {
      * @return CJSON::encode the node inserted in json encode
      */
     public function insertingnode( $newnode=null,$refnode=null,$type=null, $nodenaming=true ) {
-        if ( $type=="inside") {
-            $parent=$refnode;
-        } else {
-            $parent=$refnode->parent();
+//        if ( $type=="inside") {
+//            $parent=$refnode;
+//        } else {
+//            $parent=$refnode->parent();
+//        }
+        $parent = ($type=="inside") ? $refnode : $refnode->parent();
+        
+        foreach( $this->inherit as $attr ) {
+            $newnode->setAttribute($attr,$parent->getAttribute($attr));
         }
         $newnode= ($nodenaming) ? $this->nodeNaming($parent, $newnode) : $newnode;
         $success=false;
