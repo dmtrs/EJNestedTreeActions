@@ -63,18 +63,32 @@ class EBehavior extends CBehavior {
     /**
      * Used internal function that takes a node and returns it as string.
      *
-     * @param CActiveRecord $model
+     * @param array of CActiveRecord $models
      * @return string In jstree format.
      */
 
-    public function formatNode($model) {
+    public function formatNode( $models ) {
+        if( is_array( $models ) ) {
+            $nodesarray=array();
+            foreach( $models as $i => $node ) {
+                $nodesarray[$i]=array(
+                    'attributes'=>array(
+                    'id'=>$node->getAttribute($this->identity)
+                    ),
+                    'data'=>$node->getAttribute($this->text),
+                );
+                if(!$node->isLeaf()) $nodesarray[$i]['state']="closed";
+            }
+            return $nodesarray;
+
+        }
         $jstreeformat=array(
         'attributes'=>array(
-            'id'=>$model->getAttribute($this->identity)
+            'id'=>$models->getAttribute($this->identity)
         ),
-            'data'=>$model->getAttribute($this->text),
+            'data'=>$models->getAttribute($this->text),
         );
-        if(!$model->isLeaf()) $jstreeformat['state']="closed";
+        if(!$models->isLeaf()) $jstreeformat['state']="closed";
             return $jstreeformat;
     }
      /**
