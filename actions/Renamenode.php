@@ -39,10 +39,22 @@ class Renamenode extends CAction {
         $id=$_GET['id'];
         $node= CActiveRecord::model($this->getController()->classname)->findByPk($id);
         $newname=$_GET['newname'];
-        $parent=$node->parent();
-        $childs=$parent->children()->findAll();
+        $checkname = true;
+        if($node->isRoot()) {
+            if( $node->hasManyRoots ) {
+                $siblings = CActiveRecord::model($this->getController()->classname)->roots()->findall();
+            } else {
+                $checkname = false;
+            }
+        } else {
+            $parent=$node->parent();
+            $siblings=$parent->children()->findAll();
+        }
+   
+        
         $node->setAttribute($this->getController()->text,$newname);
-        if($this->getController()->nameExist($childs,$node)) {
+
+        if( $checkname && $this->getController()->nameExist($siblings,$node)) {
             echo false;
             die;
         }

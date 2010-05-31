@@ -24,7 +24,7 @@ class Render extends CAction {
     public function run() {
         $id=$_GET['id'];
         if ( $id==0 ) {
-            $roots= CActiveRecord::model($this->getController()->classname)->roots()->find();
+            $roots = CActiveRecord::model($this->getController()->classname)->roots()->find();
             $rootsdata=$this->getController()->formatNode($roots);
             $jsondata='[ '.CJSON::encode($rootsdata).' ]';
         } else {
