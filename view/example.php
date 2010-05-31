@@ -141,5 +141,14 @@ echo '<input onclick=\'var t = $.tree.focused(); if(t.selected) t.create(); else
 echo '<input onclick="$.tree.focused().cut();" value="Cut" type="button">';
 echo '<input onclick="$.tree.focused().copy();" value="Copy" type="button">';
 echo '<input onclick="$.tree.focused().paste();" value="Paste" type="button">';
+echo CHtml::ajaxButton("Create root",$this->createurl('createroot'), array ('global'=>false,
+                    'type' => "GET",
+                    'async'=> false,'success'=>'js:function(bool) {
+                        if (bool) {
+                            $.tree.focused().refresh();
+                        } else {
+                            alert("You can not create root");
+                        }
+            }' ), array ( 'id'=>'createroot'));
 
 ?>

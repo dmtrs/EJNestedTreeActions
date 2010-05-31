@@ -80,30 +80,33 @@ class EBehavior extends CBehavior {
      /**
       * This method search for brother nodes with same name.
       * Used internally when trying to rename,create or move
-      * @param CActiveRecord $parent the parent of the node
+      * @param CActiveRecord $parent the parent of the node if null then $node is root
       * @param CActiveRecord $node the node that' been created/moved/renamed
       * @return CActiveRecord $node the node with the proper name
       */
-    public function nodeNaming($parent,$node){
+     public function nodeNaming($parent=null,$node) {
+         if($parent!=null) {
+             $brothers=$parent->children()->findAll(array(
+                 'condition'=>'`'.$this->text.'` LIKE :dfname',
+                 'params'=>array(':dfname'=>$node->getAttribute($this->text).'%'),
+                 )
+             );
+         } else {
+             $brothers = CActiveRecord::model($this->classname)->roots()->findall();
+         }
 
-        $brothers=$parent->children()->findAll(array(
-            'condition'=>'`'.$this->text.'` LIKE :dfname',
-            'params'=>array(':dfname'=>$node->getAttribute($this->text).'%'),
-            )
-        );
-
-        $name=$node->getAttribute($this->text);
-        $i=1;
-        $namenotfound=true;
-        do {
-            $namenotfound=$this->nameExist($brothers,$node);
-            if ($namenotfound) {
-                $node->setAttribute($this->text,$name." ".$i);
-                $i++;
-            }
-        } while($namenotfound);
-        return $node;
-    }
+         $name=$node->getAttribute($this->text);
+         $i=1;
+         $namenotfound=true;
+         do {
+             $namenotfound=$this->nameExist($brothers,$node);
+             if ($namenotfound) {
+                 $node->setAttribute($this->text,$name." ".$i);
+                 $i++;
+             }
+         } while($namenotfound);
+         return $node;
+     }
     /**
      * This method is used internally. It takes the an array of the nodes and
      * second node as well.

@@ -48,6 +48,7 @@ class Createnode extends CAction {
 
         $refid=$_GET['ref_id'];
         $type=$_GET['type'];
+        fb($refid);die;
         $refnode= CActiveRecord::model($this->getController()->classname)->findByPk($refid);
 
         $modelclass=$this->getController()->classname;
