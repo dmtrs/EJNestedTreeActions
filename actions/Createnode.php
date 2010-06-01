@@ -41,9 +41,8 @@ class Createnode extends CAction {
     /**
      * This method calls the insertingnode() method from EBehavior.php
      */
-    public function run( ) {
-
-        $defaultname = ( isset($this->getController()->defaultname) ) ? $this->getController()->defaultname : "New Folder" ;
+    public function run(){
+        $defaultname = $this->getController()->defaultname;
 
         $refid=$_GET['ref_id'];
         $type=$_GET['type'];

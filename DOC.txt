@@ -31,34 +31,40 @@ After you have installed ENestedSetBehavior and CJstree and you are sure they wo
 Copy the views/example.php in the views/yourcontroller/
 
 After you have setup properly ENestedSetBehavior and Jstree.
-Add followin in your controller:
+Add following in your controller:
 
-	public function behaviors() {
-	    return array(
-	        'EJNestedTreeActions'=>array(
-        	    'class'=>'ext.EJNestedTreeActions.EBehavior',
-	            'classname'=>'Rutree',
-	            'identity'=>'id',
-	            'text'=>'text',
-	        ),
-	    );
-	}
+~~~
+[php]
+public function behaviors() {
+	return array(
+		'EJNestedTreeActions'=>array(
+			'class'=>'ext.EJNestedTreeActions.EBehavior',
+			'classname'=>'Rutree',
+			'identity'=>'id',
+			// model's field used as node's title
+			'text'=>'text',
+			// default name for created nodes
+			'defaultname' => 'New Folder',
+		),
+	);
+}
 
+public function actions() {
+	return array (
+		'render'=>'ext.EJNestedTreeActions.actions.Render',
+		'createnode'=>'ext.EJNestedTreeActions.actions.Createnode',
+		'renamenode'=>'ext.EJNestedTreeActions.actions.Renamenode',
+		'deletenode'=>'ext.EJNestedTreeActions.actions.Deletenode',
+		'movenode'=>'ext.EJNestedTreeActions.actions.Movenode',
+		'copynode'=>'ext.EJNestedTreeActions.actions.Copynode',
+		'createroot'=>'ext.EJNestedTreeActions.actions.Createroot',
+	);
+}
 
-	public function actions() {
-	    return array (
-	        'render'=>'ext.EJNestedTreeActions.actions.Render',
-	        'createnode'=>'ext.EJNestedTreeActions.actions.Createnode',
-	        'renamenode'=>'ext.EJNestedTreeActions.actions.Renamenode',
-	        'deletenode'=>'ext.EJNestedTreeActions.actions.Deletenode',
-	        'movenode'=>'ext.EJNestedTreeActions.actions.Movenode',
-	        'copynode'=>'ext.EJNestedTreeActions.actions.Copynode',
-	    );
-	}
-
-	public function actionIndex() {
-	    $this->render('example');
-	}
+public function actionIndex() {
+	$this->render('example');
+}
+~~~
 
 ###Details and explanation
 
