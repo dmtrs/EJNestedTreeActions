@@ -1,0 +1,32 @@
+EJNestedTreeActions
+==================
+Version. 0.3beta
+Author: [tydeas_dr](mailto:tydeas.dr@gmail.com)
+
+Version 0.3beta
+--------------
+
+* bugs occured fixed
+* Createroot action added, works only for hasmanyroot trees
+* Inherit feature added, check documentation
+* Multiroot trees supported 
+_Some actions are not ready to be supported like move/copy node from root to another root and this is a ENestedSetehavior issue_
+* Createorcopy action deleted ( if ever existed ).
+* Fb calls has been removed ( sorry for all that trouble ).
+
+Version 0.2:
+------------
+
+* bug fixed in CDbCriteria
+* Copy node, childs will be copied too.
+
+Version 0.1:
+------------
+
+* Support trees with only one root . Multiple tries will be available at v 0.3.
+* Render nodes.
+* Create new node inside selected node.
+* Delete node ( delete childs as well ).
+* Rename node.
+* Move node.
+* Copy node. Node's childs will not be copied, this will be avalaible at v 0.2.
