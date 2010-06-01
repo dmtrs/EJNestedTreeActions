@@ -60,6 +60,12 @@ class EBehavior extends CBehavior {
      * @var boolean
      */
     public $nodenaming;
+
+	/**
+	 * New node's default name 
+	 */
+	public $defaultname = 'New folder';
+
     /**
      * Used internal function that takes a node and returns it as string.
      *

@@ -6,6 +6,7 @@ Author: [tydeas_dr](mailto:tydeas.dr@gmail.com)
 Version *next*:
 ---------------
 * Allowed root node deletion (Sam Dark)
+* Moved default node name to behavior (Sam Dark)
 
 Version 0.3beta:
 ----------------

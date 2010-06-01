@@ -45,5 +45,4 @@ class Copynode extends CAction {
 
         $this->getController()->copytree($id[0],$ref,$type);
     }
-
 }
