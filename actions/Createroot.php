@@ -32,8 +32,7 @@ class Createroot extends CAction {
 			$newroot->setAttribute($newroot->root, 1);
             if ( $newroot->saveNode(false,null) ) {
                 echo 1;die;
-            }
-			print_r($newroot->attributes);
+            }			
         }
         echo 0;die;
 
