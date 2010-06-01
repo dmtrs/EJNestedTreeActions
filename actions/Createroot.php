@@ -24,7 +24,7 @@ class Createroot extends CAction {
     public function run( ) {
         $hasmanyroots = CActiveRecord::model($this->getController()->classname)->hasManyRoots;		
         if($hasmanyroots){
-            $defaultname = ( isset($this->getController()->defaultname) ) ? $this->getController()->defaultname : "New root";
+            $defaultname = $this->getController()->defaultRootName;
             $modelclass=$this->getController()->classname;
             $newroot = new $modelclass();
             $newroot->setAttribute($this->getController()->text,$defaultname);
