@@ -64,7 +64,12 @@ class EBehavior extends CBehavior {
 	/**
 	 * New node's default name 
 	 */
-	public $defaultname = 'New folder';
+	public $defaultNodeName = 'New folder';
+
+	/**
+	 * New root's default name
+	 */
+	public $defaultRootName = 'New root';
 
     /**
      * Used internal function that takes a node and returns it as string.

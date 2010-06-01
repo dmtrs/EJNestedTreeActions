@@ -44,7 +44,9 @@ public function behaviors() {
 			// model's field used as node's title
 			'text'=>'text',
 			// default name for created nodes
-			'defaultname' => 'New Folder',
+			'defaultNodeName' => 'New Folder',
+			// default name for created roots
+			'defaultRootName' => 'New Root',
 		),
 	);
 }
