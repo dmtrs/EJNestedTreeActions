@@ -24,7 +24,7 @@
  * @copyright Evresis A.E. <www.evresis.gr>
  */
 class Movenode extends CAction {
-    public function run() {
+    public function run(){
         $id=$_GET['id'];
         $refid=$_GET['ref_id'];
         $type=$_GET['type'];
@@ -41,6 +41,7 @@ class Movenode extends CAction {
         $parent = ($type=="inside") ? $refnode : $refnode->parent();
         
         $current=$this->getController()->nodeNaming($parent,$current);
+
         $current->save();
         /**
          * $differentparent is true when the old parent is different from new else false
@@ -75,6 +76,4 @@ class Movenode extends CAction {
 
         echo $current->getAttribute($this->getController()->text);
     }
-
 }
-?>

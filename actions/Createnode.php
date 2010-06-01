@@ -60,4 +60,3 @@ class Createnode extends CAction {
     }
 
 }
-?>

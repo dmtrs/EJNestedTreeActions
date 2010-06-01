@@ -2,12 +2,13 @@
 /**
  *  Deletenode:
  * This extension of CAction is part of a the EJNestedTreeActions set.
- * It is used to delete a node in tree.
- *  Conventions:
+ * It is used to delete a node in a tree.
+ * 
+ * Conventions:
  * The jstree must use GET to send ID of the node to delete with name 'id'.
- * If the node to delete is root it is not deleted. Will work on it in next versions.
+ *  
  * See first lines of run().
- *  Callback for jstree:
+ * Callback for jstree:
  *
  * <pre>
  *       'ondelete'=>'js:function(NODE, TREE_OBJ,RB) {
@@ -56,18 +57,8 @@
 class Deletenode extends CAction {
     public function run() {
         $id=$_GET['id'];
-        $nodetodelete= CActiveRecord::model($this->getController()->classname)->findByPk($id);
+        $nodetodelete= CActiveRecord::model($this->getController()->classname)->findByPk($id);               
         
-        if ($nodetodelete->isRoot()) {
-            echo false;
-            die;
-        }
-        
-        if ( $nodetodelete->deleteNode() ) {
-            echo true;
-        } else {
-            echo false;
-        }
+        echo $nodetodelete->deleteNode();
     }
 }
-?>
