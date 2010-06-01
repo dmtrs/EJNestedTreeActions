@@ -22,20 +22,21 @@
 class Createroot extends CAction {
  
     public function run( ) {
-        $hasmanyroots = CActiveRecord::model($this->getController()->classname)->hasManyRoots;
+        $hasmanyroots = CActiveRecord::model($this->getController()->classname)->hasManyRoots;		
         if($hasmanyroots){
-            $defaultname = ( isset($this->getController()->defaultname) ) ? $this->getController()->defaultname : "New R1oot" ;
+            $defaultname = ( isset($this->getController()->defaultname) ) ? $this->getController()->defaultname : "New root";
             $modelclass=$this->getController()->classname;
             $newroot = new $modelclass();
             $newroot->setAttribute($this->getController()->text,$defaultname);
             $newroot = $this->getController()->nodenaming( null , $newroot );
+			$newroot->setAttribute($newroot->root, 1);
             if ( $newroot->saveNode(false,null) ) {
                 echo 1;die;
             }
+			print_r($newroot->attributes);
         }
         echo 0;die;
 
     }
 
 }
-?>

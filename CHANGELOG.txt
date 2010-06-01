@@ -3,8 +3,12 @@ EJNestedTreeActions
 Version. 0.3beta
 Author: [tydeas_dr](mailto:tydeas.dr@gmail.com)
 
-Version 0.3beta
---------------
+Version *next*:
+---------------
+* Allowed root node deletion (Sam Dark)
+
+Version 0.3beta:
+----------------
 
 * bugs occured fixed
 * Createroot action added, works only for hasmanyroot trees
