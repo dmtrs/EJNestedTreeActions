@@ -15,40 +15,26 @@
  *  Callback:
  * 'beforedata'=>'js: function(NODE, TREE_OBJ) { return { id : $(NODE).attr("id") || 0 }; }'
  *
- * TODO: work with multiple roots.
- * @version 0.1
+ * @version 0.3beta
  * @author Dimitrios Meggidis <tydeas.dr@gmail.com>
  * @copyright Evresis A.E. <www.evresis.gr>
  */
 class Render extends CAction {
+
     public function run() {
+
         $id=$_GET['id'];
+
         if ( $id==0 ) {
-            $roots = CActiveRecord::model($this->getController()->classname)->roots()->findall();
-            $rootsdata=$this->getController()->formatNode($roots);
-            //$jsondata='[ '.CJSON::encode($rootsdata).' ]';
-//            foreach($rootsdata as $i=>$root ) {
-//                $jsondata.=CJSON::encode($root);
-//            
-//            }
-            fb(CJSON::encode($rootsdata));die;
+            $nodestoformat = CActiveRecord::model($this->getController()->classname)->roots()->findall();
         } else {
-
             $node= CActiveRecord::model($this->getController()->classname)->findByPk($id);
-
-            $childs=$node->children()->findall();
-
-            $jsondata='[ ';
-            foreach( $childs as $i=>$eachnode ) {
-                $jsondata.=CJSON::encode($this->getController()->formatNode($eachnode));
-                if( $i==count($childs)-1 ) {
-                    $jsondata.=' ]';
-                } else {
-                    $jsondata.=',';
-                }
-            }
+            $nodestoformat=$node->children()->findall();
         }
-        echo $jsondata;
+
+        $rootsdata=$this->getController()->formatNode($nodestoformat);
+        echo CJSON::encode($rootsdata);
+
     }
 }
 ?>

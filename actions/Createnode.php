@@ -19,8 +19,7 @@
  *                   data: ({ref_id : REF_NODE.id , type : TYPE }),
  *                   dataType: "json",
  *                   success: function( jsondata ){
- *                       console.log(jsondata);
- *                       if ( jsondata ) {
+  *                       if ( jsondata ) {
  *                           $(NODE).attr("id",jsondata.attributes.id);
  *                           $(NODE).children("a:eq(0)").html("<ins>&nbsp;</ins>"+jsondata.data);
  *                           crt=true;
@@ -34,7 +33,7 @@
  *       }',
  * </pre>
  * 
- * @version 0.1
+ * @version 0.3beta
  * @author Dimitrios Meggidis <tydeas.dr@gmail.com>
  * @copyright Evresis A.E. <www.evresis.gr>
  */
@@ -48,7 +47,7 @@ class Createnode extends CAction {
 
         $refid=$_GET['ref_id'];
         $type=$_GET['type'];
-        fb($refid);die;
+
         $refnode= CActiveRecord::model($this->getController()->classname)->findByPk($refid);
 
         $modelclass=$this->getController()->classname;

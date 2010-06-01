@@ -28,6 +28,7 @@
  *           });
  *        }',
  * </pre>
+ * @version 0.3beta
  * @author Dimitrios Meggidis <tydeas.dr@gmail.com>
  * @copyright Evresis A.E. <www.evresis.gr>
  */

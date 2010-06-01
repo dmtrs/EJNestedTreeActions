@@ -17,7 +17,7 @@
  *   );
  * }
  * 
- * @version 0.1
+ * @version 0.3beta
  * @author Dimitrios Meggidis <tydeas.dr@gmail.com>
  * @copyright Evresis A.E. <www.evresis.gr>
  */
@@ -63,7 +63,7 @@ class EBehavior extends CBehavior {
     /**
      * Used internal function that takes a node and returns it as string.
      *
-     * @param array of CActiveRecord $models
+     * @param mied of CActiveRecord array of $models or single model
      * @return string In jstree format.
      */
 
@@ -80,7 +80,6 @@ class EBehavior extends CBehavior {
                 if(!$node->isLeaf()) $nodesarray[$i]['state']="closed";
             }
             return $nodesarray;
-
         }
         $jstreeformat=array(
         'attributes'=>array(
