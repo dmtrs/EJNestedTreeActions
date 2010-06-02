@@ -35,7 +35,10 @@
  * @copyright Evresis A.E. <www.evresis.gr>
  */
 class Renamenode extends CAction {
-    public function run() {
+    public function run(){
+		header('Cache-Control: max-age=0,no-cache,no-store,post-check=0,pre-check=0');
+		header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+
         $id=$_GET['id'];
         $node= CActiveRecord::model($this->getController()->classname)->findByPk($id);
         $newname=$_GET['newname'];

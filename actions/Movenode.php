@@ -25,6 +25,9 @@
  */
 class Movenode extends CAction {
     public function run(){
+		header('Cache-Control: max-age=0,no-cache,no-store,post-check=0,pre-check=0');
+		header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+		
         $id=$_GET['id'];
         $refid=$_GET['ref_id'];
         $type=$_GET['type'];
