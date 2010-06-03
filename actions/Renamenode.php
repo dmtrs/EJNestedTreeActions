@@ -9,39 +9,16 @@
  * with names 'id' and 'newname'
  * See first lines of run().
  * It echoes true if the rename was done successfull else echoes false.
- *
- *  Callback:
- * <pre>
- *        'onrename'=>'js:function(NODE, TREE_OBJ, RB)  {
- *           var rnm=false;
- *           $.ajax({
- *               url: "'.$this->createUrl('renamenode').'" ,
- *               global: false,
- *               type: "GET",
- *               async: false,
- *               data: ({id : NODE.id , newname : TREE_OBJ.get_text(NODE)  }),
- *               success: function(rnmreturn){
- *                    rnm=rnmreturn;
- *               }
- *           });
- *           if ( !rnm ) {
- *               alert("Node with name "+TREE_OBJ.get_text(NODE)+" already exist.");
- *               jQuery.tree.rollback(RB);
- *           }
- *       }',
- * </pre>
+ * 
  * @version 0.3beta
  * @author Dimitrios Meggidis <tydeas.dr@gmail.com>
  * @copyright Evresis A.E. <www.evresis.gr>
  */
 class Renamenode extends CAction {
     public function run(){
-		header('Cache-Control: max-age=0,no-cache,no-store,post-check=0,pre-check=0');
-		header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
-
-        $id=$_GET['id'];
+        $id=$_POST['id'];
         $node= CActiveRecord::model($this->getController()->classname)->findByPk($id);
-        $newname=$_GET['newname'];
+        $newname=$_POST['newname'];
         $checkname = true;
         if($node->isRoot()) {
             if( $node->hasManyRoots ) {

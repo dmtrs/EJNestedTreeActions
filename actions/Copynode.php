@@ -10,24 +10,7 @@
  * You may notice that the ID is exploded in first line of metho run().
  * This happens because the proper callback 'oncopy' of the jstree returns
  * an 'id' like "3_copy" or "4_copy".."ID_copy".
- *
- * 'oncopy' callback for jstree:
- * <pre>
- *      'oncopy'=>'js:function(NODE, REF_NODE, TYPE, TREE_OBJ, RB) {
- *           var cp=false;
- *           $.ajax({
- *               url: "'.$this->createUrl('copynode').'" ,
- *               global: false,
- *               type: "GET",
- *               async: false,
- *               data: ({id : NODE.id , ref_id : REF_NODE.id , type: TYPE }),
- *               dataType: "json",
- *               success: function( ){
- *                      TREE_OBJ.refresh(NODE);
- *               }
- *           });
- *        }',
- * </pre>
+ * 
  * @version 0.3beta
  * @author Dimitrios Meggidis <tydeas.dr@gmail.com>
  * @copyright Evresis A.E. <www.evresis.gr>
@@ -39,12 +22,9 @@ class Copynode extends CAction {
      * permitted.
      */
     public function run() {
-		header('Cache-Control: max-age=0,no-cache,no-store,post-check=0,pre-check=0');
-		header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
-
-        $id=explode("_",$_GET['id']);
-        $ref=$_GET['ref_id'];
-        $type=$_GET['type'];
+        $id=explode("_",$_POST['id']);
+        $ref=$_POST['ref_id'];
+        $type=$_POST['type'];
 
         $this->getController()->copytree($id[0],$ref,$type);
     }

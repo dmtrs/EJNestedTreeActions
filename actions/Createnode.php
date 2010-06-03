@@ -6,32 +6,7 @@
  *  Conventions:
  * The jstree must use GET to send REF_ID's id with name 'ref_id'
  * and TYPE with name 'type'
- * See first lines of run().
- *  'oncreate cCallback for jstree:
- * <pre>
- *       'oncreate'=>'js:function(NODE, REF_NODE, TYPE, TREE_OBJ, RB) {
- *               var crt=false;
- *               $.ajax({
- *                   url: "'.$this->createUrl('createnode').'" ,
- *                   global: false,
- *                   type: "GET",
- *                   async: false,
- *                   data: ({ref_id : REF_NODE.id , type : TYPE }),
- *                   dataType: "json",
- *                   success: function( jsondata ){
-  *                       if ( jsondata ) {
- *                           $(NODE).attr("id",jsondata.attributes.id);
- *                           $(NODE).children("a:eq(0)").html("<ins>&nbsp;</ins>"+jsondata.data);
- *                           crt=true;
- *                       }
- *                   }
- *               });
- *           if ( !crt ) {
- *               alert("Could not create node "+TYPE+" "+TREE_OBJ.get_text(REF_NODE));
- *               jQuery.tree.rollback(RB);
- *           }
- *       }',
- * </pre>
+ * See first lines of run(). 
  * 
  * @version 0.3beta
  * @author Dimitrios Meggidis <tydeas.dr@gmail.com>
@@ -42,21 +17,16 @@ class Createnode extends CAction {
      * This method calls the insertingnode() method from EBehavior.php
      */
     public function run(){
-		header('Cache-Control: max-age=0,no-cache,no-store,post-check=0,pre-check=0');
-		header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
-
         $defaultname = $this->getController()->defaultNodeName;
 
-        $refid=$_GET['ref_id'];
-        $type=$_GET['type'];
+        $refid=$_POST['ref_id'];
+        $type=$_POST['type'];
 
         $refnode= CActiveRecord::model($this->getController()->classname)->findByPk($refid);
 
         $modelclass=$this->getController()->classname;
         $newnode=new $modelclass();
-        $newnode->setAttribute($this->getController()->text,$defaultname);
-
-        //echo $this->getController()->insertingnode( $newnode,$refnode,$type,$this->getController()->nodenaming,$this->getController()->crtinherit );
+        $newnode->setAttribute($this->getController()->text,$defaultname);        
 
         echo $this->getController()->insertingnode( $newnode,$refnode,$type,true,$this->getController()->crtinherit);
     }

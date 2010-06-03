@@ -7,7 +7,8 @@ Version *next*:
 ---------------
 * Allowed root node deletion (Sam Dark)
 * Added EBehavior::defaultNodeName and EBehavior::defaultRootName to be able to set default names for created nodes and roots (Sam Dark)
-* Prevented caching in IE (Sam Dark)
+* Prevented caching in IE by using POST (Sam Dark)
+* Moved all example code to the widget (Sam Dark)
 
 Version 0.3beta:
 ----------------

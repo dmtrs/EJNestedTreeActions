@@ -14,10 +14,6 @@
  * done because if you move a node in a place where there is a brother with
  * the same name the name of the moved node is changing ( by calling internal
  * function nodenaming, see EBehavior )
- *  Callback for jstree:
- * <pre>
-
- * </pre>
  *
  * @version 0.3beta
  * @author Dimitrios Meggidis <tydeas.dr@gmail.com>
@@ -25,12 +21,9 @@
  */
 class Movenode extends CAction {
     public function run(){
-		header('Cache-Control: max-age=0,no-cache,no-store,post-check=0,pre-check=0');
-		header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
-		
-        $id=$_GET['id'];
-        $refid=$_GET['ref_id'];
-        $type=$_GET['type'];
+        $id=$_POST['id'];
+        $refid=$_POST['ref_id'];
+        $type=$_POST['type'];
         $refnode = CActiveRecord::model($this->getController()->classname)->findByPk($refid);
 
         if ( $refnode->isRoot() && $type!="inside" ) {

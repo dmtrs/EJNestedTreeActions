@@ -2,12 +2,12 @@ EJNestedTreeActions
 ==================
 Version. 0.3beta
 Author: [tydeas_dr](mailto:tydeas.dr@gmail.com)
-
+Author: Alexander Makarov, Sam Dark (sam@rmcreative.ru)
 
 ###Requirements
 * Yii 1.0 or above
-* ENestedSetBehavior 0.85 (see in README/Overview for link)
-* CJstree (see in overview for link)
+* ENestedSetBehavior 0.85 (see in README/Overview for a link)
+* CJstree (see in overview for a link)
 * [jsTree version 0.9.9.a](http://code.google.com/p/jstree/downloads/list)
 
 ### Dirs structure and installation
@@ -26,12 +26,8 @@ Extract the release file under `protected/extensions`
 
 
 ###Usage
-After you have installed ENestedSetBehavior and CJstree and you are sure they work properly.
-
-Copy the views/example.php in the views/yourcontroller/
-
-After you have setup properly ENestedSetBehavior and Jstree.
-Add following in your controller:
+After you have installed ENestedSetBehavior and CJstree you should configure
+ENestedSetBehavior. Add following in your controller:
 
 ~~~
 [php]
@@ -39,6 +35,7 @@ public function behaviors() {
 	return array(
 		'EJNestedTreeActions'=>array(
 			'class'=>'ext.EJNestedTreeActions.EBehavior',
+			// Your model with ENestedSetBehavior
 			'classname'=>'Rutree',
 			'identity'=>'id',
 			// model's field used as node's title
@@ -64,19 +61,28 @@ public function actions() {
 }
 
 public function actionIndex() {
-	$this->render('example');
+	$this->render('myview');
 }
+~~~
+
+In `myview` the only thing you need is to call a widget:
+
+~~~
+[php]
+<?php $this->widget('ext.EJNestedTreeActions.EJsTreeEx')?>
 ~~~
 
 ###Details and explanation
 
 ####Behavior
 In the above example we have set some attributes to the behavior. This certain attributes are the required and _must_ exist or else extension won't work
+
 #####Required attributes
 _classname_ => string. The name of the model this controller handles.
 _identity_ => string. The name of model's id attribute.
 _text_ => string. The name of model's attribute that will be used as the name of the nodes.
 For the last 2 you can refer to the ENestedSetBehavior.
+
 #####Inherit feature
 _inherit_ => array. The attribute names from which the node child will inherit values.
 For example if your with countries/locations tree is about has root
@@ -120,18 +126,14 @@ For example if you want the inherit to appear when you create a new node:
 And play ;)
 
 ####Actions
-Non of the above actions are required. It's up to what you want user to do with your tree.
-The available actions are under folder actions and i think their name explain it all.
+None of the above actions are required. It's up to what you want user to do with your tree.
+The available actions are under folder actions and their names are self explainable.
 
 #####Some attention here
-To use an action you must have the proper callback to the jstree when you initiliaze it. For each action in the .php file at the top there is the proper callback that at least worked.
-The view/example.php file has a proper all of them there.
-
 _Createroot_ won't create a root if the NestedSet you have is single root (hasmanyroots=>false) and this is a ENestedSetBehavior issue i think (will have to check).
 To create a root node for single root trees you have to do it manual with an insert to the database with this certain values.
 	
 	id=1 , lft=1 , rgt=2 , level=1
 
 ###Issues
-If you are facing issues, please refer to the forum or the issues in the github site.
-
+If you are facing issues, please refer to the forum or the issues at the github site.
