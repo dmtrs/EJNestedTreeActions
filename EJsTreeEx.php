@@ -194,7 +194,7 @@ class EJsTreeEx extends CJsTree {
 			}',
 
 		"error"=>"js:function() { }",
-		"ondblclk"=>"js:function(){alert('Doubleclick');TREE_OBJ.toggle_branch.call(TREE_OBJ, NODE); TREE_OBJ.select_branch.call(TREE_OBJ, NODE); }",
+		"ondblclk"=>"js:function(NODE, TREE_OBJ, EV){TREE_OBJ.toggle_branch.call(TREE_OBJ, NODE); TREE_OBJ.select_branch.call(TREE_OBJ, NODE); }",
 		"onrgtclk"=>"js:function(NODE, TREE_OBJ, EV){
 			EV.preventDefault();
 			EV.stopPropagation();

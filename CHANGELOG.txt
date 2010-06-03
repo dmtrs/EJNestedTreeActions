@@ -10,6 +10,7 @@ Version *next*:
 * Added EBehavior::defaultNodeName and EBehavior::defaultRootName to be able to set default names for created nodes and roots (Sam Dark)
 * Prevented caching in IE by using POST (Sam Dark)
 * Moved all example code to the widget (Sam Dark)
+* Double clicking now expands node (Sam Dark)
 
 Version 0.3beta:
 ----------------
