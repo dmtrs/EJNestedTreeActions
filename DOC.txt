@@ -14,7 +14,6 @@ Author: [Alexander Makarov, Sam Dark](mailto:sam@rmcreative.ru)
 
 Extract the release file under `protected/extensions`
 
-* EJNestedTreeBehavior/views/example.php
 * EJNestedTreeBehavior/actions/Copynode.php
 * EJNestedTreeBehavior/actions/Createnode.php
 * EJNestedTreeBehavior/actions/Creatroot.php
@@ -23,7 +22,6 @@ Extract the release file under `protected/extensions`
 * EJNestedTreeBehavior/actions/Renamenode.php
 * EJNestedTreeBehavior/actions/Render.php
 * EJNestedTreeBehavior/EBehavior.php
-
 
 ###Usage
 After you have installed ENestedSetBehavior and CJstree you should configure
