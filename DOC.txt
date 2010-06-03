@@ -2,7 +2,7 @@ EJNestedTreeActions
 ==================
 Version. 0.3beta
 Author: [tydeas_dr](mailto:tydeas.dr@gmail.com)
-Author: Alexander Makarov, Sam Dark (sam@rmcreative.ru)
+Author: [Alexander Makarov, Sam Dark](mailto:sam@rmcreative.ru)
 
 ###Requirements
 * Yii 1.0 or above
