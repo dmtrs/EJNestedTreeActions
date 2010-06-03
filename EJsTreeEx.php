@@ -165,7 +165,6 @@ class EJsTreeEx extends CJsTree {
 						data: ({ref_id : REF_NODE.id , type : TYPE }),
 						dataType: "json",
 						success: function( jsondata ){
-							console.log(jsondata);
 							if ( jsondata ) {
 								$(NODE).attr("id",jsondata.attributes.id);
 								$(NODE).children("a:eq(0)").html("<ins>&nbsp;</ins>"+jsondata.data);
