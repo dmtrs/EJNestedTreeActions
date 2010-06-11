@@ -1,12 +1,12 @@
 EJNestedTreeActions
 ==================
-Version. 0.3beta
+Version. *next*
 Author: [tydeas_dr](mailto:tydeas.dr@gmail.com)
 Author: [Alexander Makarov, Sam Dark](mailto:sam@rmcreative.ru)
 
 ###Requirements
 * Yii 1.0 or above
-* ENestedSetBehavior 0.85 (see in README/Overview for a link)
+* ENestedSetBehavior 0.90 (see in README/Overview for a link)
 * CJstree (see in overview for a link)
 * [jsTree version 0.9.9.a](http://code.google.com/p/jstree/downloads/list)
 
@@ -73,7 +73,8 @@ In `myview` the only thing you need is to call a widget:
 ###Details and explanation
 
 ####Behavior
-In the above example we have set some attributes to the behavior. This certain attributes are the required and _must_ exist or else extension won't work
+In the above example we have set some attributes to the behavior.
+These attributes are the required and _must_ exist or extension won't work
 
 #####Required attributes
 _classname_ => string. The name of the model this controller handles.
@@ -85,7 +86,7 @@ For the last 2 you can refer to the ENestedSetBehavior.
 _inherit_ => array. The attribute names from which the node child will inherit values.
 For example if your with countries/locations tree is about has root
 
-	Europe 
+	Europe
 	|
 	|--UK
 	|  |-London
@@ -100,7 +101,7 @@ For example if your with countries/locations tree is about has root
 This model may have a _Currency_ attribute that you may want to inherit every time you creat a new node.
 In this occassion databse default value won't work because UK has Pounds and GR has Euro.
 But for every town under the country there is the same currency. So what you have to do in behavior is:
-	
+
 	....
 	'inherit' => array('Currency'),
 	....
@@ -115,7 +116,7 @@ _cpinherit_ => boolean. If inherit will happen when coping node-s from parent to
 _crtinherit_ => boolean. If inherit will happen when creating node under parent.
 
 For example if you want the inherit to appear when you create a new node:
-	
+
 	....
         'inherit' => array('Currency','language'),
 	'crtinherit'=>true
@@ -130,7 +131,7 @@ The available actions are under folder actions and their names are self explaina
 #####Some attention here
 _Createroot_ won't create a root if the NestedSet you have is single root (hasmanyroots=>false) and this is a ENestedSetBehavior issue i think (will have to check).
 To create a root node for single root trees you have to do it manual with an insert to the database with this certain values.
-	
+
 	id=1 , lft=1 , rgt=2 , level=1
 
 ###Issues

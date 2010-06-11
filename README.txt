@@ -1,6 +1,6 @@
 EJNestedTreeActions
 ==================
-Version. 0.3beta
+Version. *next*
 Author: [tydeas_dr](mailto:tydeas.dr@gmail.com)
 Author: [Alexander Makarov, Sam Dark](mailto:sam@rmcreative.ru)
 Copyright &copy; 2010 [Evresis](http://www.evresis.com)
@@ -12,7 +12,7 @@ What EJNestedTreeActions IS and What IS NOT
 EJNestedTreeActions IS NOT:
 
 * a nested set behavior for your model
-* a jstree extension 
+* a jstree extension
 
 EJNestedTreeActions IS only a set of actions and a behavior and you as well need:
 
@@ -26,20 +26,20 @@ Confused ? MVC
 
 
 ### Model
-To make your model act like a nested set you will need the 
+To make your model act like a nested set you will need the
 ENestedSetBehavior, as we said before. This extension make your model to be able
 to append,prepend,return the children etc.
 
-### View 
-At view we have the pretty one jstree. To use the jstree you will need the 
-CJstree extension ( found as jstree extension ). 
+### View
+At view we have the pretty one jstree. To use the jstree you will need the
+CJstree extension ( found as jstree extension ).
 This will give you the ability to drag & drop, copy & paste, create new nodes etc. at your view.
 
 ### Controller
-This is where EJNestedTreeActions comes. 
+This is where EJNestedTreeActions comes.
 The jstree has the ability to use async ajax to make request and get results. This async request
-will call a controller's action to do so. This is what the EJNestedTreeActions does. 
-Take the request from the jstree make the appropriate append,prepend, etc for your model and 
+will call a controller's action to do so. This is what the EJNestedTreeActions does.
+Take the request from the jstree make the appropriate append,prepend, etc for your model and
 return data to the jstree.
 
 
@@ -48,10 +48,7 @@ How all this work and the callbacks
 
 You first create you table and use the ENestedBehavior like it is described in it's documentation.
 Use the EJNestedTreeBehavior as described in documentation.
-Use CJstree as described in it's documentation. *Attention:* You will need to add some proper callbacks
-when you will use the jstree for each action you want to use from the EJNestedBehavior. This proper 
-callbacks can be found in each actions documentation but will give you an example too.
-
+Use CJstree as described in it's documentation.
 
 git repository
 --------------
@@ -71,4 +68,3 @@ the people from #yii at freenode in general and specially Javache for the help o
 * [Github repository](http://github.com/dmtrs/EJNestedTreeActions/) For the latest version and official issue reporting.
 * [Join discussion](http://www.yiiframework.com/forum/index.php?/topic/9434-extension-ejnestedtreeactions/)
 All suggestions, contributes, ideas are welcome.
-

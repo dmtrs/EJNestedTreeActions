@@ -1,6 +1,6 @@
 EJNestedTreeActions
 ==================
-Version. 0.3beta
+Version. *next*
 Author: [tydeas_dr](mailto:tydeas.dr@gmail.com)
 Author: [Alexander Makarov, Sam Dark](mailto:sam@rmcreative.ru)
 
@@ -11,6 +11,7 @@ Version *next*:
 * Prevented caching in IE by using POST (Sam Dark)
 * Moved all example code to the widget (Sam Dark)
 * Double clicking now expands node (Sam Dark)
+* Trying to move before / after root now does not cause errors (Sam Dark)
 
 Version 0.3beta:
 ----------------
@@ -18,7 +19,7 @@ Version 0.3beta:
 * bugs occured fixed
 * Createroot action added, works only for hasmanyroot trees
 * Inherit feature added, check documentation
-* Multiroot trees supported 
+* Multiroot trees supported
 _Some actions are not ready to be supported like move/copy node from root to another root and this is a ENestedSetehavior issue_
 * Createorcopy action deleted ( if ever existed ).
 * Fb calls has been removed ( sorry for all that trouble ).
