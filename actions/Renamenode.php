@@ -39,7 +39,7 @@ class Renamenode extends CAction {
             die;
         }
         $node->validate();
-        if($node->save()) {
+        if($node->saveNode()) {
             echo true;
         }
     }
