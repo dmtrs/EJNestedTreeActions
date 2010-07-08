@@ -39,7 +39,7 @@ class Movenode extends CAction {
 
         $current=$this->getController()->nodeNaming($parent,$current);
 
-        $current->save();
+        $current->saveNode();
 
 
         /**
